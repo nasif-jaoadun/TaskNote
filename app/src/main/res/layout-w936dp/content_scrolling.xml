@@ -8,19 +8,32 @@
     tools:context=".EditorActivity"
     tools:showIn="@layout/activity_editor">
 
+    <EditText
+        android:id="@+id/editTextTaskNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:inputType="textMultiLine|textCapSentences"
+        android:text="@string/task_name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.core.widget.NestedScrollView
-        android:layout_width="840dp"
-        android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTaskNote">
 
         <EditText
-            android:id="@+id/editTextEditor"
+            android:id="@+id/editTextTaskNoteDetails"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="48dp"
             android:inputType="textMultiLine|textCapSentences"
             android:text="@string/large_text" />
+
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

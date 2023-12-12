@@ -22,8 +22,8 @@ class TaskNoteAdapter(mTaskNotes : List<TaskNoteEntity>) : RecyclerView.Adapter<
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val taskNote : TaskNoteEntity = mTaskNotes.get(position)
-        binding.textView.text = taskNote.taskNameText
-        binding.radioButton.isChecked = taskNote.taskStatus
+        binding.textViewTaskDetails.text = taskNote.taskNameText
+        binding.radioButton.isChecked = taskNote.taskDone
         binding.radioButton.setOnCheckedChangeListener{ compoundButton: CompoundButton, isChecked: Boolean ->
 
         }
