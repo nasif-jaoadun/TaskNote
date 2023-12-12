@@ -2,16 +2,12 @@
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jnasif.tasknote.data.TaskNoteEntity
+import com.jnasif.tasknote.database.TaskNoteEntity
 import com.jnasif.tasknote.databinding.ActivityMainBinding
 import com.jnasif.tasknote.ui.TaskNoteAdapter
 import com.jnasif.tasknote.utilities.SampleDataCreatorUtility

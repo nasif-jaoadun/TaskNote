@@ -1,6 +1,6 @@
 package com.jnasif.tasknote.utilities
 
-import com.jnasif.tasknote.data.TaskNoteEntity
+import com.jnasif.tasknote.database.TaskNoteEntity
 
 class SampleDataCreatorUtility {
     companion object{

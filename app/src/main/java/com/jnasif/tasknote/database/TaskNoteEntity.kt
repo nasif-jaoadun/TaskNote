@@ -1,4 +1,4 @@
-package com.jnasif.tasknote.data
+package com.jnasif.tasknote.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

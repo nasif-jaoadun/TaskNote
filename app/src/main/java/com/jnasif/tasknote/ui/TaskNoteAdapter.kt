@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.recyclerview.widget.RecyclerView
-import com.jnasif.tasknote.data.TaskNoteEntity
+import com.jnasif.tasknote.database.TaskNoteEntity
 import com.jnasif.tasknote.databinding.TaskNoteListItemBinding
 
 class TaskNoteAdapter(mTaskNotes : List<TaskNoteEntity>) : RecyclerView.Adapter<TaskNoteAdapter.ViewHolder>() {
