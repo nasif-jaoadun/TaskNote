@@ -6,17 +6,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
 import android.view.Menu
 import android.view.MenuItem
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jnasif.tasknote.database.TaskNoteEntity
 import com.jnasif.tasknote.databinding.ActivityMainBinding
 import com.jnasif.tasknote.ui.TaskNoteAdapter
 import com.jnasif.tasknote.utilities.SampleDataCreatorUtility
+import com.jnasif.tasknote.viewmodel.MainViewModel
 
  class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: TaskNoteAdapter
+    private lateinit var mainViewModel: MainViewModel
     private lateinit var taskNotes : List<TaskNoteEntity>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,11 +34,17 @@ import com.jnasif.tasknote.utilities.SampleDataCreatorUtility
             val intent = Intent(this, EditorActivity::class.java)
             startActivity(intent)
         }
-        taskNotes = SampleDataCreatorUtility.getTaskNotes()
+        initViewModel()
         setListViewProperties()
+        taskNotes = SampleDataCreatorUtility.getTaskNotes()
+//        taskNotes = mainViewModel.mTaskNote
     }
 
-    private fun setListViewProperties() {
+     private fun initViewModel() {
+         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+     }
+
+     private fun setListViewProperties() {
         binding.layoutContentMain.recyclerVIew.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(this)
         binding.layoutContentMain.recyclerVIew.layoutManager = layoutManager
