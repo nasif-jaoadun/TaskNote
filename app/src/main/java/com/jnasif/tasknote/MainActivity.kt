@@ -34,10 +34,14 @@ import com.jnasif.tasknote.viewmodel.MainViewModel
             val intent = Intent(this, EditorActivity::class.java)
             startActivity(intent)
         }
+//        taskNotes = SampleDataCreatorUtility.getTaskNotes()
         initViewModel()
+        taskNotes = mainViewModel.mTaskNote
         setListViewProperties()
-        taskNotes = SampleDataCreatorUtility.getTaskNotes()
-//        taskNotes = mainViewModel.mTaskNote
+
+        for(taskNote in taskNotes){
+            System.out.println(taskNote)
+        }
     }
 
      private fun initViewModel() {
