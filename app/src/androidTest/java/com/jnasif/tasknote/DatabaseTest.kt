@@ -24,7 +24,7 @@ class DatabaseTest {
     fun createDb(){
         var context = InstrumentationRegistry.getInstrumentation().context
         mDb = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
-        mDao = mDb.taskNote()
+        mDao = mDb.taskNoteDao()
         Log.i(TAG, "createDb")
     }
 

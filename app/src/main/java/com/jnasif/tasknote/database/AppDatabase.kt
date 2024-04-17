@@ -6,25 +6,29 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
-@Database(entities = [TaskNoteEntity::class], version = 1)
+@Database(entities = [TaskNoteEntity::class], version = 1, exportSchema = false)
 @TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun taskNote() : TaskNoteDao
+    abstract fun taskNoteDao() : TaskNoteDao
     companion object{
-        val DATABASE_NAME = "AppDatabase.db"
+        private const val DATABASE_NAME = "AppDatabase.db"
         @Volatile
-        private lateinit var instance : AppDatabase
+        private var instance : AppDatabase? = null
 
-        fun getInstance(context : Context) : AppDatabase{
+        fun getInstance(context : Context) : AppDatabase {
             if (instance == null){
                 synchronized(this){
                     if(instance == null){
-                        instance = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, DATABASE_NAME).build()
+                        instance = Room.databaseBuilder(
+                            context.applicationContext,
+                            AppDatabase::class.java,
+                            DATABASE_NAME
+                        ).build()
                     }
                 }
             }
-            return instance
+            return instance!!
         }
 
     }
