@@ -6,12 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
 import android.view.Menu
 import android.view.MenuItem
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jnasif.tasknote.database.TaskNoteEntity
 import com.jnasif.tasknote.databinding.ActivityMainBinding
 import com.jnasif.tasknote.ui.TaskNoteAdapter
-import com.jnasif.tasknote.utilities.SampleDataCreatorUtility
 import com.jnasif.tasknote.viewmodel.MainViewModel
 
  class MainActivity : AppCompatActivity() {
@@ -35,9 +35,10 @@ import com.jnasif.tasknote.viewmodel.MainViewModel
             startActivity(intent)
         }
 //        taskNotes = SampleDataCreatorUtility.getTaskNotes()
+        initRecyclerview()
         initViewModel()
-        taskNotes = mainViewModel.mTaskNote
-        setListViewProperties()
+//        taskNotes = mainViewModel.mTaskNote
+
 
         for(taskNote in taskNotes){
             System.out.println(taskNote)
@@ -46,15 +47,22 @@ import com.jnasif.tasknote.viewmodel.MainViewModel
 
      private fun initViewModel() {
          mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+         mainViewModel.mTaskNote.observe(this, Observer {
+             if(adapter==null){
+                 adapter = TaskNoteAdapter(taskNotes)
+                 binding.layoutContentMain.recyclerVIew.adapter =adapter
+             }else{
+                 adapter.notifyDataSetChanged()
+             }
+         })
      }
 
-     private fun setListViewProperties() {
+     private fun initRecyclerview() {
         binding.layoutContentMain.recyclerVIew.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(this)
         binding.layoutContentMain.recyclerVIew.layoutManager = layoutManager
 
-        adapter = TaskNoteAdapter(taskNotes)
-        binding.layoutContentMain.recyclerVIew.adapter = adapter
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
