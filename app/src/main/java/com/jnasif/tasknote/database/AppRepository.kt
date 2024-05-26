@@ -24,4 +24,8 @@ class AppRepository(application : Application) {
     fun getAllTaskNotes() : LiveData<List<TaskNoteEntity>>{
         return mDb.getAll()
     }
+
+    fun deleteAllData() {
+        mDb.deleteAll()
+    }
 }

@@ -135,4 +135,5 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="task_name">Task Name</string>
+    <string name="delete_all_data">Delete All data</string>
 </resources>

@@ -10,4 +10,12 @@ import com.jnasif.tasknote.utilities.SampleDataCreatorUtility
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val mRepository = AppRepository(application) // bari bari bari bari
     var mTaskNote : LiveData<List<TaskNoteEntity>> = mRepository.mTaskNote
+
+    fun addSampleData() {
+        mRepository.addSampleData()
+    }
+
+    fun deleteAllData() {
+        mRepository.deleteAllData()
+    }
 }

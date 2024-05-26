@@ -61,8 +61,6 @@ import com.jnasif.tasknote.viewmodel.MainViewModel
         binding.layoutContentMain.recyclerVIew.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(this)
         binding.layoutContentMain.recyclerVIew.layoutManager = layoutManager
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -71,13 +69,29 @@ import com.jnasif.tasknote.viewmodel.MainViewModel
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+            R.id.action_sdd_sample_data -> {
+                addSampleData()
+                true
+            }
+            R.id.action_delete_all_data -> {
+                deleteAllData()
+               true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
         }
     }
-}
+
+     private fun addSampleData() {
+         mainViewModel.addSampleData()
+     }
+     private fun deleteAllData() {
+         mainViewModel.deleteAllData()
+     }
+ }
