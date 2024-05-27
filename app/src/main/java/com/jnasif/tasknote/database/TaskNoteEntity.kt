@@ -10,5 +10,18 @@ data class TaskNoteEntity (
     val id: Int,
     val createDate: Date,
     val taskNameText: String,
+    val taskNoteText: String,
     val taskDone : Boolean
-)
+) {
+    constructor(
+        createDate: Date,
+        taskNameText: String,
+        taskNoteText: String,
+        taskDone: Boolean
+    ) : this(
+        createDate = createDate,
+        taskNameText = taskNameText,
+        taskNoteText = taskNoteText,
+        taskDone = taskDone
+    )
+}

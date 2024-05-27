@@ -17,7 +17,7 @@ class AppRepository(application : Application) {
         }
     }
     fun addSampleData(){
-        mDb.insertAllTaskNotes(SampleDataCreatorUtility.getTaskNotes())
+        mDb.insertAllTaskNotes(SampleDataCreatorUtility.getTaskNotesWithoutID())
         mTaskNote = getAllTaskNotes()
     }
 
