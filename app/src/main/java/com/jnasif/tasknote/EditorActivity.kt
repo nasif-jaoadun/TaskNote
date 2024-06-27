@@ -1,6 +1,7 @@
 package com.jnasif.tasknote
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -48,5 +49,21 @@ class EditorActivity : AppCompatActivity() {
                 mViewModel!!.loadData(taskNoteId)
             }
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.getItemId() == android.R.id.home){
+            saveAndReturn()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        saveAndReturn()
+    }
+
+    private fun saveAndReturn() {
+
     }
 }
