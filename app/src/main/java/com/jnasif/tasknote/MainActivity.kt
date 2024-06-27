@@ -49,7 +49,7 @@ import com.jnasif.tasknote.viewmodel.MainViewModel
          mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
          mainViewModel.mTaskNote.observe(this, Observer {
              if(adapter==null){
-                 adapter = TaskNoteAdapter(taskNotes)
+                 adapter = TaskNoteAdapter(taskNotes, this)
                  binding.layoutContentMain.recyclerVIew.adapter =adapter
              }else{
                  adapter.notifyDataSetChanged()

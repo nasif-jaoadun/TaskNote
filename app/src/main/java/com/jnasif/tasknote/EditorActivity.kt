@@ -6,9 +6,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.jnasif.tasknote.databinding.ActivityEditorBinding
+import com.jnasif.tasknote.utilities.TASK_NOTE_ID_KEY
 import com.jnasif.tasknote.viewmodel.EditorViewModel
 
 class EditorActivity : AppCompatActivity() {
+    private var mNewTaskNote: Boolean = false
     private var mViewModel: EditorViewModel? = null
     private var binding: ActivityEditorBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +22,7 @@ class EditorActivity : AppCompatActivity() {
         //        CollapsingToolbarLayout toolBarLayout = binding.toolbarLayout;
         //        toolBarLayout.setTitle(getTitle());
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_done)
         val fab = binding!!.fab
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -31,8 +34,19 @@ class EditorActivity : AppCompatActivity() {
     private fun initViewModel() {
         mViewModel = ViewModelProvider(this).get(EditorViewModel::class.java)
         mViewModel!!.mLiveTaskNote.observe(this, Observer {
-            binding?.layoutEditorContent?.editTextTaskNote?.text
-            binding?.layoutEditorContent?.editTextTaskNoteDetails?.text
+            if(it!=null){
+                binding?.layoutEditorContent?.editTextTaskNote!!.setText(it.taskNameText)
+                binding?.layoutEditorContent?.editTextTaskNoteDetails!!.setText(it.taskNoteText)
+            }
+            val extras = intent.extras
+            if(extras == null){
+                setTitle(getString(R.string.new_task_note))
+                mNewTaskNote = true
+            }else{
+                setTitle(getString(R.string.edit_task_note))
+                val taskNoteId = extras.getInt(TASK_NOTE_ID_KEY)
+                mViewModel!!.loadData(taskNoteId)
+            }
         })
     }
 }

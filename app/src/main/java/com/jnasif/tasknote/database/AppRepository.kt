@@ -6,10 +6,13 @@ import com.jnasif.tasknote.utilities.SampleDataCreatorUtility
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.concurrent.Executor
+import java.util.concurrent.Executors
 
 class AppRepository(application : Application) {
     private val mDb = AppDatabase.getInstance(application.applicationContext).taskNoteDao()
     lateinit var mTaskNote : LiveData<List<TaskNoteEntity>>
+    private val executor : Executor = Executors.newSingleThreadExecutor()
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
@@ -17,8 +20,10 @@ class AppRepository(application : Application) {
         }
     }
     fun addSampleData(){
-        mDb.insertAllTaskNotes(SampleDataCreatorUtility.getTaskNotesWithoutID())
-        mTaskNote = getAllTaskNotes()
+        executor.execute(Runnable {
+            mDb.insertAllTaskNotes(SampleDataCreatorUtility.getTaskNotesWithoutID())
+            mTaskNote = getAllTaskNotes()
+        })
     }
 
     fun getAllTaskNotes() : LiveData<List<TaskNoteEntity>>{
@@ -26,6 +31,12 @@ class AppRepository(application : Application) {
     }
 
     fun deleteAllData() {
-        mDb.deleteAll()
+        executor.execute(Runnable {
+            mDb.deleteAll()
+        })
+    }
+
+    fun getTaskNoteById(taskNoteId: Int): TaskNoteEntity {
+        return mDb.getTaskNoteById(taskNoteId)
     }
 }

@@ -136,4 +136,6 @@
     </string>
     <string name="task_name">Task Name</string>
     <string name="delete_all_data">Delete All data</string>
+    <string name="new_task_note"><![CDATA[New Task & Note]]></string>
+    <string name="edit_task_note"><![CDATA[Edit Task & Note]]></string>
 </resources>

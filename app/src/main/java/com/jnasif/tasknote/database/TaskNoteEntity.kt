@@ -5,23 +5,23 @@ import androidx.room.PrimaryKey
 import java.util.Date
 
 @Entity(tableName= "taskNotes")
-data class TaskNoteEntity (
+data class TaskNoteEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    val createDate: Date,
-    val taskNameText: String,
-    val taskNoteText: String,
-    val taskDone : Boolean
+    var id: Int,
+    var createDate: Date,
+    var taskNameText: String,
+    var taskNoteText: String,
+    var taskDone : Boolean
 ) {
     constructor(
         createDate: Date,
         taskNameText: String,
         taskNoteText: String,
         taskDone: Boolean
-    ) : this(
-        createDate = createDate,
-        taskNameText = taskNameText,
-        taskNoteText = taskNoteText,
-        taskDone = taskDone
+    ) : this (
+        createDate,
+        taskNameText,
+        taskNoteText,
+        taskDone
     )
 }
