@@ -19,4 +19,15 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
             mLiveTaskNote.postValue(taskNoteEntity)
         })
     }
+
+    fun saveTaskNote(taskText: String, noteText: String) {
+        val taskNote : TaskNoteEntity? = mLiveTaskNote.value
+        if(taskNote == null){
+
+        }else{
+            taskNote.taskNameText = taskText
+            taskNote.taskNoteText = noteText
+            mRepository.insertTaskNote(taskNote)
+        }
+    }
 }

@@ -64,6 +64,6 @@ class EditorActivity : AppCompatActivity() {
     }
 
     private fun saveAndReturn() {
-
+        mViewModel?.saveTaskNote(binding?.layoutEditorContent?.editTextTaskNote.toString(), binding?.layoutEditorContent?.editTextTaskNoteDetails.toString())
     }
 }

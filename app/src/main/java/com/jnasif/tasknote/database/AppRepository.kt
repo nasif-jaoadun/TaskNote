@@ -39,4 +39,8 @@ class AppRepository(application : Application) {
     fun getTaskNoteById(taskNoteId: Int): TaskNoteEntity {
         return mDb.getTaskNoteById(taskNoteId)
     }
+
+    fun insertTaskNote(taskNote: TaskNoteEntity) {
+        executor.execute(Runnable { mDb.insertTaskNote(taskNote) })
+    }
 }
