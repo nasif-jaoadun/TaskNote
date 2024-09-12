@@ -12,4 +12,6 @@ data class TaskNoteEntity(
     var taskNameText: String,
     var taskNoteText: String,
     var taskDone : Boolean
-)
+) {
+    constructor(createDate: Date, taskNameText: String, taskNoteText: String, taskDone: Boolean) : this(createDate, taskNameText, taskNoteText,taskDone)
+}
