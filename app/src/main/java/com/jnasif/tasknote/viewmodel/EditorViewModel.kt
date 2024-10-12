@@ -35,4 +35,8 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
         }
         mRepository.insertTaskNote(taskNote)
     }
+
+    fun deleteTaskNote() {
+        mRepository.deleteTaskNote(mLiveTaskNote.value)
+    }
 }

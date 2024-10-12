@@ -43,4 +43,8 @@ class AppRepository(application : Application) {
     fun insertTaskNote(taskNote: TaskNoteEntity) {
         executor.execute(Runnable { mDb.insertTaskNote(taskNote) })
     }
+
+    fun deleteTaskNote(taskNote: TaskNoteEntity?) {
+        executor.execute(Runnable { mDb.deleteTaskNote(taskNote!!) })
+    }
 }

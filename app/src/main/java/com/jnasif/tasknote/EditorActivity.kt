@@ -1,6 +1,7 @@
 package com.jnasif.tasknote
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -51,9 +52,20 @@ class EditorActivity : AppCompatActivity() {
         })
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        if(!mNewTaskNote){
+            val inflater = menuInflater
+            inflater.inflate(R.menu.menu_editor, menu)
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.getItemId() == android.R.id.home){
             saveAndReturn()
+            return true
+        }else if(item.itemId == R.id.action_delete){
+            mViewModel?.deleteTaskNote()
         }
         return super.onOptionsItemSelected(item)
     }
