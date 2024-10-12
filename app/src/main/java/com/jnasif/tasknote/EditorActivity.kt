@@ -66,6 +66,7 @@ class EditorActivity : AppCompatActivity() {
             return true
         }else if(item.itemId == R.id.action_delete){
             mViewModel?.deleteTaskNote()
+            finish()
         }
         return super.onOptionsItemSelected(item)
     }
