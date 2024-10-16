@@ -8,11 +8,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.jnasif.tasknote.databinding.ActivityEditorBinding
+import com.jnasif.tasknote.utilities.EDITING_KEY
 import com.jnasif.tasknote.utilities.TASK_NOTE_ID_KEY
 import com.jnasif.tasknote.viewmodel.EditorViewModel
 
 class EditorActivity : AppCompatActivity() {
     private var mNewTaskNote: Boolean = false
+    private var mEditing: Boolean = false
     private var mViewModel: EditorViewModel? = null
     private var binding: ActivityEditorBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,13 +32,15 @@ class EditorActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+
+        mEditing=savedInstanceState?.getBoolean(EDITING_KEY) ?: false
         initViewModel()
     }
 
     private fun initViewModel() {
         mViewModel = ViewModelProvider(this).get(EditorViewModel::class.java)
         mViewModel!!.mLiveTaskNote.observe(this, Observer {
-            if(it!=null){
+            if(it!=null && !mEditing){
                 binding?.layoutEditorContent?.editTextTaskNote!!.setText(it.taskNameText)
                 binding?.layoutEditorContent?.editTextTaskNoteDetails!!.setText(it.taskNoteText)
             }
@@ -78,5 +82,10 @@ class EditorActivity : AppCompatActivity() {
 
     private fun saveAndReturn() {
         mViewModel?.saveTaskNote(binding?.layoutEditorContent?.editTextTaskNote?.text.toString(), binding?.layoutEditorContent?.editTextTaskNoteDetails?.text.toString())
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean(EDITING_KEY, true)
+        super.onSaveInstanceState(outState)
     }
 }
