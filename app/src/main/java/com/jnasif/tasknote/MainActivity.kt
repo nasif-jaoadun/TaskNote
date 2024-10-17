@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jnasif.tasknote.database.TaskNoteEntity
 import com.jnasif.tasknote.databinding.ActivityMainBinding
@@ -61,6 +62,9 @@ import com.jnasif.tasknote.viewmodel.MainViewModel
         binding.layoutContentMain.recyclerVIew.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(this)
         binding.layoutContentMain.recyclerVIew.layoutManager = layoutManager
+
+         val divider = DividerItemDecoration(binding.layoutContentMain.recyclerVIew.context, layoutManager.orientation)
+         binding.layoutContentMain.recyclerVIew.addItemDecoration(divider)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
