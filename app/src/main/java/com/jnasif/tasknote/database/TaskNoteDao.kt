@@ -11,10 +11,10 @@ import androidx.room.Query
 interface TaskNoteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertTaskNote(taskNoteEntity : TaskNoteEntity)
+    suspend fun insertTaskNote(taskNoteEntity : TaskNoteEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAllTaskNotes(taskNoteS : List<TaskNoteEntity>)
+    suspend fun insertAllTaskNotes(taskNoteS : List<TaskNoteEntity>)
 
     @Delete
     fun deleteTaskNote(taskNoteEntity : TaskNoteEntity)
@@ -26,7 +26,7 @@ interface TaskNoteDao {
     fun getAll() : LiveData<List<TaskNoteEntity>>
 
     @Query("DELETE FROM taskNotes")
-    fun deleteAll() : Int
+    suspend fun deleteAll() : Int
 
     @Query("SELECT COUNT(*) from taskNotes")
     fun getCount() : Int

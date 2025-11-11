@@ -1,6 +1,7 @@
 package com.jnasif.tasknote.database
 
 import android.app.Application
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.jnasif.tasknote.utilities.SampleDataCreatorUtility
 import kotlinx.coroutines.CoroutineScope
@@ -19,32 +20,41 @@ class AppRepository(application : Application) {
             addSampleData()
         }
     }
-    fun addSampleData(){
-        executor.execute(Runnable {
-            mDb.insertAllTaskNotes(SampleDataCreatorUtility.getTaskNotesWithoutID())
-            mTaskNote = getAllTaskNotes()
-        })
+
+    fun addSampleData() {
+        CoroutineScope(Dispatchers.IO).launch {
+            addSampleDataBackEnd()
+        }
+    }
+
+    fun deleteAllData() {
+        CoroutineScope(Dispatchers.IO).launch {
+            deleteAll()
+        }
+    }
+    @WorkerThread
+    suspend fun addSampleDataBackEnd(){
+        mDb.insertAllTaskNotes(SampleDataCreatorUtility.getTaskNotesWithoutID())
+        mTaskNote = getAllTaskNotes()
     }
 
     fun getAllTaskNotes() : LiveData<List<TaskNoteEntity>>{
         return mDb.getAll()
     }
 
-    fun deleteAllData() {
-        executor.execute(Runnable {
-            mDb.deleteAll()
-        })
+    suspend fun deleteAll() {
+        mDb.deleteAll()
     }
 
     fun getTaskNoteById(taskNoteId: Int): TaskNoteEntity {
         return mDb.getTaskNoteById(taskNoteId)
     }
 
-    fun insertTaskNote(taskNote: TaskNoteEntity) {
-        executor.execute(Runnable { mDb.insertTaskNote(taskNote) })
+    suspend fun insertTaskNote(taskNote: TaskNoteEntity) {
+        mDb.insertTaskNote(taskNote)
     }
 
     fun deleteTaskNote(taskNote: TaskNoteEntity?) {
-        executor.execute(Runnable { mDb.deleteTaskNote(taskNote!!) })
+        mDb.deleteTaskNote(taskNote!!)
     }
 }

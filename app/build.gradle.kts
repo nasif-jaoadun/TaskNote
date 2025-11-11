@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id ("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -59,8 +60,9 @@ dependencies {
     // LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
 
-    val room_version = "2.6.0"
-
-    implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
+    val room_version = "2.1.0"
+    implementation ("androidx.room:room-runtime:$room_version")
+    implementation ("androidx.room:room-ktx:$room_version") // For Kotlin extensions and coroutine support
+    // If you're using Kotlin Annotation Processing (kapt) instead of KSP
+    kapt ("androidx.room:room-compiler:$room_version")
 }

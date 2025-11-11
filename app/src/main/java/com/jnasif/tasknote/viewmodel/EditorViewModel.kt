@@ -28,12 +28,12 @@ class EditorViewModel(application: Application) : AndroidViewModel(application) 
             if(TextUtils.isEmpty(taskText.trim()) || TextUtils.isEmpty(noteText.trim())){
                 return
             }
-            taskNote = TaskNoteEntity(5,Date(), taskText, noteText, false)
+            taskNote = TaskNoteEntity(0,Date(), taskText, noteText, false)
         }else{
             taskNote.taskNameText = taskText
             taskNote.taskNoteText = noteText
         }
-        mRepository.insertTaskNote(taskNote)
+//        mRepository.insertTaskNote(taskNote)
     }
 
     fun deleteTaskNote() {
