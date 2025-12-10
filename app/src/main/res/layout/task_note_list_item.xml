@@ -26,7 +26,23 @@
         app:srcCompat="@drawable/ic_edit" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewTaskName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task_name"
+        android:layout_margin="8dp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textSize="18sp"
+        android:textColor="#333"
+        app:layout_constraintEnd_toStartOf="@id/floatingActionButton"
+        app:layout_constraintRight_toLeftOf="@id/floatingActionButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewTaskDetails"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -39,6 +55,5 @@
         app:layout_constraintRight_toLeftOf="@id/floatingActionButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
